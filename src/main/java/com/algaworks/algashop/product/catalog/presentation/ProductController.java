@@ -1,5 +1,6 @@
 package com.algaworks.algashop.product.catalog.presentation;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,7 +14,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ProductDetailOutput create(@RequestBody ProductInput input) {
+    public ProductDetailOutput create(@RequestBody @Valid ProductInput input) {
         return ProductDetailOutput.builder()
                 .id(UUID.randomUUID())
                 .addedAt(OffsetDateTime.now())
@@ -26,10 +27,11 @@ public class ProductController {
                 .regularPrice(input.getRegularPrice())
                 .salePrice(input.getSalePrice())
                 .enabled(input.getEnabled())
-                .category(CategoryMinimalOutput.builder()
-                            .id(input.getCategoryId())
-                            .name("Notebook")
-                            .build()
+                .category(
+                        CategoryMinimalOutput.builder()
+                                .id(input.getCategoryId())
+                                .name("Notebook")
+                                .build()
                 )
                 .build();
     }
