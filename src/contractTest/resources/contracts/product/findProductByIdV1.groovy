@@ -22,7 +22,7 @@ Contract.make {
                 brand: "Deep Diver",
                 regularPrice: 1500.00,
                 salePrice: 1000.00,
-                inStock: false,
+                inStock: anyBoolean(),
                 enabled: true,
                 category: [
                         id: anyUuid(),
